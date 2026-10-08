@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support Agent Demo</title>
+<style>
+  :root { --bg:#f5f6f8; --card:#fff; --ink:#1c1f26; --muted:#6b7280; --accent:#2f5bea; --user:#e8edff; --line:#e3e6eb; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --card:#1b1e25; --ink:#e8eaee; --muted:#9aa1ad; --accent:#7b9bff; --user:#26305a; --line:#2b2f38; } }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.5 system-ui,sans-serif; background:var(--bg); color:var(--ink); }
+  .wrap { max-width:720px; margin:0 auto; padding:16px; display:flex; flex-direction:column; height:100vh; }
+  header { display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; padding-bottom:12px; }
+  h1 { font-size:18px; margin:0; }
+  select { padding:6px 8px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--ink); }
+  #log { flex:1; overflow:auto; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; }
+  .msg { max-width:85%; margin:0 0 12px; padding:10px 14px; border-radius:12px; white-space:pre-wrap; }
+  .bot { background:var(--bg); border:1px solid var(--line); }
+  .me { background:var(--user); margin-left:auto; }
+  .trace { font:12px ui-monospace,monospace; color:var(--muted); margin:-6px 0 12px; }
+  form { display:flex; gap:8px; padding-top:12px; }
+  input { flex:1; padding:11px 14px; border-radius:10px; border:1px solid var(--line); background:var(--card); color:var(--ink); font:inherit; }
+  button { padding:0 18px; border:0; border-radius:10px; background:var(--accent); color:#fff; font:inherit; cursor:pointer; }
+  .hint { color:var(--muted); font-size:13px; padding-top:8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Support assistant</h1>
+    <label>Signed in as
+      <select id="email"><option>alex@example.com</option><option>priya@example.com</option></select>
+    </label>
+  </header>
+  <div id="log"></div>
+  <form id="f"><input id="m" autocomplete="off" placeholder="Where is my order ORD-1001?" autofocus><button>Send</button></form>
+  <div class="hint">Try: "Cancel ORD-1002", "Where is my refund for ORD-1003?", "What is the return policy?", "Show me earbuds under $60"</div>
+</div>
+<script>
+const log = document.getElementById("log"), sid = Math.random().toString(36).slice(2);
+function add(text, cls) { const d = document.createElement("div"); d.className = "msg " + cls; d.textContent = text; log.appendChild(d); log.scrollTop = log.scrollHeight; return d; }
+function trace(calls) { if (!calls.length) return; const d = document.createElement("div"); d.className = "trace"; d.textContent = calls.map(c => "tool: " + c.tool + (c.ok ? "" : " (" + c.error + ")")).join("  ·  "); log.appendChild(d); }
+add("Hi! I can check orders, cancel eligible ones, track refunds, find products and answer policy questions.", "bot");
+document.getElementById("f").addEventListener("submit", async e => {
+  e.preventDefault();
+  const input = document.getElementById("m"), text = input.value.trim(); if (!text) return;
+  input.value = ""; add(text, "me");
+  try {
+    const r = await fetch("/api/chat", { method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ session_id: sid, email: document.getElementById("email").value, message: text }) });
+    const j = await r.json(); trace(j.tool_calls || []); add(j.reply || "Sorry, something went wrong.", "bot");
+  } catch { add("Network error. Is the server running?", "bot"); }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+[
+  {
+    "order_id": "ORD-1001",
+    "customer_email": "alex@example.com",
+    "status": "shipped",
+    "placed_at": "2026-10-03",
+    "currency": "USD",
+    "total": 129.98,
+    "items": [
+      {"product_id": "P-100", "name": "AuraBuds Pro Wireless Earbuds", "qty": 1, "price": 129.98}
+    ],
+    "carrier": "SwiftShip",
+    "tracking_number": "SS7741920031",
+    "expected_delivery": "2026-10-10",
+    "last_update": "2026-10-07 18:40 - Departed regional hub",
+    "refund": null
+  },
+  {
+    "order_id": "ORD-1002",
+    "customer_email": "alex@example.com",
+    "status": "processing",
+    "placed_at": "2026-10-07",
+    "currency": "USD",
+    "total": 84.50,
+    "items": [
+      {"product_id": "P-210", "name": "TrailMate 20L Daypack", "qty": 1, "price": 59.50},
+      {"product_id": "P-310", "name": "HydroFlask Steel Bottle 750ml", "qty": 1, "price": 25.00}
+    ],
+    "carrier": null,
+    "tracking_number": null,
+    "expected_delivery": "2026-10-13",
+    "last_update": "2026-10-07 21:05 - Order received, preparing for dispatch",
+    "refund": null
+  },
+  {
+    "order_id": "ORD-1003",
+    "customer_email": "alex@example.com",
+    "status": "delivered",
+    "placed_at": "2026-09-22",
+    "delivered_at": "2026-09-27",
+    "currency": "USD",
+    "total": 59.99,
+    "items": [
+      {"product_id": "P-120", "name": "VoltCharge 65W GaN Charger", "qty": 1, "price": 59.99}
+    ],
+    "carrier": "SwiftShip",
+    "tracking_number": "SS7738810244",
+    "expected_delivery": "2026-09-27",
+    "last_update": "2026-09-27 14:12 - Delivered",
+    "refund": {
+      "status": "processing",
+      "amount": 59.99,
+      "method": "original payment method",
+      "reason": "Returned - item defective",
+      "initiated_at": "2026-10-02",
+      "expected_by": "2026-10-12"
+    }
+  },
+  {
+    "order_id": "ORD-2001",
+    "customer_email": "priya@example.com",
+    "status": "out_for_delivery",
+    "placed_at": "2026-10-04",
+    "currency": "USD",
+    "total": 249.00,
+    "items": [
+      {"product_id": "P-400", "name": "LumaDesk Standing Desk Lamp", "qty": 1, "price": 249.00}
+    ],
+    "carrier": "SwiftShip",
+    "tracking_number": "SS7750011987",
+    "expected_delivery": "2026-10-08",
+    "last_update": "2026-10-08 07:55 - Out for delivery",
+    "refund": null
+  },
+  {
+    "order_id": "ORD-2002",
+    "customer_email": "priya@example.com",
+    "status": "cancelled",
+    "placed_at": "2026-09-28",
+    "currency": "USD",
+    "total": 39.00,
+    "items": [
+      {"product_id": "P-320", "name": "FlexGrip Yoga Mat", "qty": 1, "price": 39.00}
+    ],
+    "carrier": null,
+    "tracking_number": null,
+    "expected_delivery": null,
+    "last_update": "2026-09-29 10:30 - Cancelled by customer",
+    "refund": {
+      "status": "completed",
+      "amount": 39.00,
+      "method": "original payment method",
+      "reason": "Order cancelled before shipping",
+      "initiated_at": "2026-09-29",
+      "expected_by": "2026-10-06"
+    }
+  },
+  {
+    "order_id": "ORD-2003",
+    "customer_email": "priya@example.com",
+    "status": "delivered",
+    "placed_at": "2026-10-01",
+    "delivered_at": "2026-10-05",
+    "currency": "USD",
+    "total": 74.99,
+    "items": [
+      {"product_id": "P-130", "name": "KeyForge Mechanical Keyboard", "qty": 1, "price": 74.99}
+    ],
+    "carrier": "SwiftShip",
+    "tracking_number": "SS7747723310",
+    "expected_delivery": "2026-10-05",
+    "last_update": "2026-10-05 16:20 - Delivered",
+    "refund": null
+  }
+]

@@ -1,0 +1,9 @@
+# Core agent (offline brain, tools, RAG, safety) has NO third-party dependencies.
+pytest>=8.0
+
+# Optional: Claude tool-calling brain
+anthropic>=0.40
+
+# Optional: web API + chat UI
+fastapi>=0.110
+uvicorn>=0.29
